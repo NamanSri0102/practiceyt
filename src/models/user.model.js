@@ -10,6 +10,14 @@ const userSchema = new Schema(
             index:true,
             trim:true, 
         },
+        username:{
+            type:String,
+            required:true,
+            unique:true,
+            index:true,
+            trim:true,
+            lowercase:true
+        },
         email:{
             type: String,
             required: true,
@@ -32,16 +40,16 @@ const userSchema = new Schema(
         ],
         dob:{
             type:Date,
-            required:true
+            required:false
         },
         gender:{
             type:String,
-            required:true,
+            required:false,
             enum:["Male","Female","Others"]
         },
         contact:{
-            type:Number,
-            required:true,
+            type:String,
+            required:false,
             minLength:[10,"Must contain 10 digit"],
             maxLength:[10,"Must contain 10 digit"]
         },
@@ -62,7 +70,7 @@ userSchema.pre("save",async function(next){
     if(!this.isModified("password"))return
 
 
-    this.password = bcrypt.hash(this.password,10)
+    this.password =await bcrypt.hash(this.password,10)
     next()
 });
 
