@@ -1,5 +1,5 @@
 
-import { DB_NAME } from "./constants.js";
+
 import dbConnect from "./db/dbconnect.js";
 import dotenv from 'dotenv'
 import {app} from './app.js'
@@ -10,9 +10,9 @@ dotenv.config({
  
 dbConnect()
 .then(()=>{
-    app.listen(process.env.PORT||8000),()=>{
+    app.listen(process.env.PORT||8000,()=>{
         console.log(`server listening at port : ${process.env.PORT}`)
-    }
+    })
 })
 .catch((err)=>{
     console.log("mongodb connection failed!", err);

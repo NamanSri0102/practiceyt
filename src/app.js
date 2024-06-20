@@ -15,6 +15,12 @@ app.use(express.urlencoded({extended:true,
 app.use(express.static("public"));
 app.use(cookieParser());
 
+// routes import
 
+import userRouter from './router/user.router.js'
+
+// routes decleration
+
+app.use("/api/v1/users",userRouter);
 
 export {app};
